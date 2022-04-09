@@ -10,7 +10,7 @@
   border: 0;
   top: 20px;
   right: 20px;
-  transition: .3s;
+  transition: 0.3s;
 }
 .cards__delete-button:hover {
   opacity: 0.5;
