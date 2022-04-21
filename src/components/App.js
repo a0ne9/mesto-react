@@ -95,10 +95,9 @@ function App() {
     const isOwned = cards.some((i) => i._id === currentUser._id);
     api
       .deleteCard(card._id, !isOwned)
-      .then((newCard) => {
-        console.log(newCard)
-          }
-      )
+      .then(() => {
+        setCards((state) => state.filter((c) => c._id !== card._id));
+      })
       .catch((err) => {
         console.log(err);
       });
