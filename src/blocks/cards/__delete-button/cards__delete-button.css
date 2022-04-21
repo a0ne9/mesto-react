@@ -1,4 +1,5 @@
 .cards__delete-button {
+  display: none;
   background: none;
   background-image: url(../../../vendor/images/Group.svg);
   cursor: pointer;
