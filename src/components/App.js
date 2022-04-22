@@ -26,7 +26,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  });
+  }, []);
 
   function openProfilePopup() {
     toggleEditProfile(true);
@@ -112,12 +112,18 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  });
+  }, []);
 
   function handleAddPlaceSubmit({ name, link }) {
-    api.addCard(name, link).then((newCard) => {
-      setCards([newCard, ...cards]);
-    });
+    api
+      .addCard(name, link)
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (

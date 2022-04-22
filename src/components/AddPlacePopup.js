@@ -2,13 +2,29 @@ import PopupWithForm from "./PopupWithForm";
 import React from "react";
 
 function AddPlacePopup(props) {
-  const nameRef = React.useRef();
-  const linkRef = React.useRef();
+  const [title, setTitle] = React.useState("");
+  const [src, setSrc] = React.useState("");
 
-  function handleSubmit() {
+  function handleNameChange(e) {
+    setTitle(e.target.value);
+  }
+
+  function handleLinkChange(e) {
+    setSrc(e.target.value);
+  }
+
+  React.useEffect(() => {
+    if (!props.isOpen) {
+      setSrc("")
+      setTitle("")
+    }
+  }, [props.isOpen]);
+
+  function handleSubmit(e) {
+    e.preventDefault();
     props.onAddPlace({
-      name: nameRef.current.value,
-      link: linkRef.current.value,
+      name: title,
+      link: src,
     });
   }
 
@@ -29,7 +45,8 @@ function AddPlacePopup(props) {
         id="title-field"
         minLength="2"
         maxLength="30"
-        ref={nameRef}
+        value={title || ""}
+        onChange={handleNameChange}
         required
       />
       <span className="popup__input-error title-field-error"></span>
@@ -39,7 +56,8 @@ function AddPlacePopup(props) {
         className="popup__input"
         placeholder="Ссылка на картинку"
         id="link-field"
-        ref={linkRef}
+        value={src || ""}
+        onChange={handleLinkChange}
         required
       />
       <span className="popup__input-error link-field-error"></span>

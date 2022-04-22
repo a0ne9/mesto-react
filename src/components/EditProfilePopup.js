@@ -20,7 +20,7 @@ function EditProfilePopup(props) {
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, props.isOpen]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -30,7 +30,7 @@ function EditProfilePopup(props) {
     });
   }
 
-    return (
+  return (
     <PopupWithForm
       name="profile"
       title="Редактировать профиль"
@@ -47,7 +47,7 @@ function EditProfilePopup(props) {
         id="name-field"
         minLength="2"
         maxLength="40"
-        value={name}
+        value={name || " "}
         onChange={handleNameChange}
         required
       />
@@ -60,7 +60,7 @@ function EditProfilePopup(props) {
         id="job-field"
         minLength="2"
         maxLength="200"
-        value={description}
+        value={description || " "}
         onChange={handleDescriptionChange}
         required
       />
